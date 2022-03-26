@@ -1,4 +1,4 @@
-package com.example.dockerdemo.beanFactory;
+package com.example.dockerdemo.A01;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
