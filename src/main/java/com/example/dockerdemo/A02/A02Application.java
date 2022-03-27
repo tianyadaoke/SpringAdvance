@@ -20,6 +20,9 @@ import org.springframework.web.servlet.mvc.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * xml，配置类等初始化容器
+ */
 public class A02Application {
     public static void main(String[] args) {
         // testClassPathXmlApplicationContext();
