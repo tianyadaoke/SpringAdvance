@@ -1,4 +1,4 @@
-package com.example.dockerdemo.A03;
+package com.example.dockerdemo.a03;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

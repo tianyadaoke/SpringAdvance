@@ -1,4 +1,4 @@
-package com.example.dockerdemo.A01;
+package com.example.dockerdemo.a01;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

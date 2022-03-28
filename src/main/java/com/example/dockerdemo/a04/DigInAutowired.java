@@ -1,18 +1,15 @@
-package com.example.dockerdemo.A04;
+package com.example.dockerdemo.a04;
 
 import org.springframework.beans.PropertyValues;
-import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.annotation.InjectionMetadata;
 import org.springframework.beans.factory.config.DependencyDescriptor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ContextAnnotationAutowireCandidateResolver;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.env.StandardEnvironment;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class DigInAutowired {

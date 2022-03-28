@@ -1,4 +1,4 @@
-package com.example.dockerdemo.A03;
+package com.example.dockerdemo.a03;
 
 import java.util.ArrayList;
 import java.util.List;

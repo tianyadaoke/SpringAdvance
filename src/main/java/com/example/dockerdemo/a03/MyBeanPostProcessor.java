@@ -1,4 +1,4 @@
-package com.example.dockerdemo.A03;
+package com.example.dockerdemo.a03;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;

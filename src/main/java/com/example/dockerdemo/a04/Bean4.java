@@ -1,4 +1,4 @@
-package com.example.dockerdemo.A04;
+package com.example.dockerdemo.a04;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
