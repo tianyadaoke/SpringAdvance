@@ -2,7 +2,10 @@ package com.example.dockerdemo.a05;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.example.dockerdemo.a05.component.Bean5;
+import com.example.dockerdemo.a05.mapper.Mapper1;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +39,12 @@ public class Config {
 
     }
 
+    @Bean
+    public MapperFactoryBean<Mapper1> mapper1(SqlSessionFactory sessionFactory){
+        MapperFactoryBean<Mapper1> factory=new MapperFactoryBean<>(Mapper1.class);
 
+        return factory;
+    }
 
 
 }

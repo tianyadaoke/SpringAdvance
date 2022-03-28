@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.lang.invoke.VarHandle;
+import java.util.Map;
 import java.util.Set;
 
 public class A05Application {
@@ -61,18 +62,24 @@ public class A05Application {
 //                }
 //            }
 //        }
-        CachingMetadataReaderFactory factory = new CachingMetadataReaderFactory();
-        MetadataReader reader = factory.getMetadataReader(new ClassPathResource("com/example/dockerdemo/a05/Config.class"));
-        Set<MethodMetadata> methods = reader.getAnnotationMetadata().getAnnotatedMethods(Bean.class.getName());
         System.out.println("------methods------");
-        methods.forEach(m->{
-            System.out.println(m);
-            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition();
-            builder.setFactoryMethodOnBean(m.getMethodName(),"config");
-            builder.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR);
-            AbstractBeanDefinition beanDefinition = builder.getBeanDefinition();
-            context.getDefaultListableBeanFactory().registerBeanDefinition(m.getMethodName(),beanDefinition);
-        });
+//        CachingMetadataReaderFactory factory = new CachingMetadataReaderFactory();
+//        MetadataReader reader = factory.getMetadataReader(new ClassPathResource("com/example/dockerdemo/a05/Config.class"));
+//        Set<MethodMetadata> methods = reader.getAnnotationMetadata().getAnnotatedMethods(Bean.class.getName());
+//        methods.forEach(m->{
+//            System.out.println(m);
+//            String initMethod = m.getAnnotationAttributes(Bean.class.getName()).get("initMethod").toString();
+//            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition();
+//            builder.setFactoryMethodOnBean(m.getMethodName(),"config");
+//            builder.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR);
+//            if(initMethod.length()>0){
+//                builder.setInitMethodName(initMethod);
+//            }
+//            AbstractBeanDefinition beanDefinition = builder.getBeanDefinition();
+//            context.getDefaultListableBeanFactory().registerBeanDefinition(m.getMethodName(),beanDefinition);
+//        });
+        // 代替以上代码
+        context.registerBean(AtBeanPostProcessor.class);
         System.out.println("------methods------");
         context.refresh();
         System.out.println("------getBeanDefinitionNames------");
