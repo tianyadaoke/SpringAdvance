@@ -80,6 +80,7 @@ public class A05Application {
 //        });
         // 代替以上代码
         context.registerBean(AtBeanPostProcessor.class);
+        context.registerBean(MapperPostProcessor.class);
         System.out.println("------methods------");
         context.refresh();
         System.out.println("------getBeanDefinitionNames------");
