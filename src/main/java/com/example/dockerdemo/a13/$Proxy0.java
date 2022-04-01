@@ -16,7 +16,8 @@ public class $Proxy0 implements A13.Foo {
     }
 
     @Override
-    public void bar() {
-        invocationHandler.invoke();
+    public int bar() {
+        Object result = invocationHandler.invoke();
+        return (int) result;
     }
 }

@@ -3,7 +3,8 @@ package com.example.dockerdemo.a13;
 public class A13 {
     interface Foo {
         void foo();
-        void bar();
+
+        int bar();
     }
 
     static class Target implements Foo {
@@ -14,23 +15,25 @@ public class A13 {
         }
 
         @Override
-        public void bar() {
+        public int bar() {
             System.out.println("target bar");
+            return 100;
         }
     }
-    interface InvocationHandler{
-         void invoke();
+
+    interface InvocationHandler {
+        Object invoke();
     }
+
     public static void main(String[] args) {
-         Foo proxy = new $Proxy0(new InvocationHandler() {
-             @Override
-             public void invoke() {
-                 System.out.println("before...");
-                 new A13.Target().foo();
-                 System.out.println("after...");
-             }
-         });
-         proxy.foo();
+        Foo proxy = new $Proxy0(new InvocationHandler() {
+            @Override
+            public Object invoke() {
+                System.out.println("before...");
+                return new A13.Target().bar();
+            }
+        });
+        proxy.foo();
     }
 
 }
