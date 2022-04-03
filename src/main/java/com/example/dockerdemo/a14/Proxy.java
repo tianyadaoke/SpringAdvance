@@ -44,7 +44,7 @@ public class Proxy extends Target{
     @Override
     public void save() {
         try {
-            interceptor.intercept(this,save0,new Object[0],null);
+            interceptor.intercept(this,save0,new Object[0],save0Proxy);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -53,7 +53,7 @@ public class Proxy extends Target{
     @Override
     public void save(int i) {
         try {
-            interceptor.intercept(this,save1,new Object[]{i},null);
+            interceptor.intercept(this,save1,new Object[]{i},save1Proxy);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class Proxy extends Target{
     @Override
     public void save(long j) {
         try {
-            interceptor.intercept(this,save2,new Object[]{j},null);
+            interceptor.intercept(this,save2,new Object[]{j},save2Proxy);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

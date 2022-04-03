@@ -8,7 +8,8 @@ public class A14 {
         proxy.setInterceptor((o, method, objects, methodProxy) -> {
             System.out.println("before....");
             // return method.invoke(target, objects);
-            return methodProxy.invoke(target,objects); //内部无反射，结合目标用
+            // return methodProxy.invoke(target,objects); //内部无反射，结合目标用
+            return methodProxy.invokeSuper(o,objects); //内部无反射，结合代理用
         });
         proxy.save();
         proxy.save(1);
