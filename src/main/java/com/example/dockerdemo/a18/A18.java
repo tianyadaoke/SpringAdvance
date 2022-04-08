@@ -25,9 +25,9 @@ public class A18 {
                 AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
                 pointcut.setExpression(expression);
                 // 通知类
-                AspectJMethodBeforeAdvice beforeAdvice = new AspectJMethodBeforeAdvice(method, pointcut, factory);
+                AspectJMethodBeforeAdvice advice = new AspectJMethodBeforeAdvice(method, pointcut, factory);
                 // 切面
-                DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, beforeAdvice);
+                DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
                 advisors.add(advisor);
             } else if(method.isAnnotationPresent(AfterReturning.class)) {
                 // 解析切点
@@ -35,9 +35,9 @@ public class A18 {
                 AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
                 pointcut.setExpression(expression);
                 // 通知类
-                AspectJAfterReturningAdvice beforeAdvice = new AspectJAfterReturningAdvice(method, pointcut, factory);
+                AspectJAfterReturningAdvice advice = new AspectJAfterReturningAdvice(method, pointcut, factory);
                 // 切面
-                DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, beforeAdvice);
+                DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
                 advisors.add(advisor);
             }
             else if(method.isAnnotationPresent(Around.class)) {
@@ -46,9 +46,9 @@ public class A18 {
                 AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
                 pointcut.setExpression(expression);
                 // 通知类
-                AspectJAroundAdvice beforeAdvice = new AspectJAroundAdvice(method, pointcut, factory);
+                AspectJAroundAdvice advice = new AspectJAroundAdvice(method, pointcut, factory);
                 // 切面
-                DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, beforeAdvice);
+                DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, advice);
                 advisors.add(advisor);
             }
         }
