@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Controller1 {
-    record User(String name,Integer age){};
+    record User(String name,Integer age){}
     private final static Log logger = LogFactory.getLog(Controller1.class);
     @GetMapping("/test1")
     public ModelAndView test1(){
@@ -27,8 +27,8 @@ public class Controller1 {
     }
     @RequestMapping("/test4.yml")
     @Yml
-    public User test4(@Token String token){
-        logger.debug("test3:"+token);
+    public User test4(){
+        logger.debug("test4()");
         return new User("zhangsan",18);
     }
 

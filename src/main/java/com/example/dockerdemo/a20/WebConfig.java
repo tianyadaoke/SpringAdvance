@@ -10,6 +10,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 @Configuration
 @ComponentScan
@@ -35,6 +37,16 @@ public class WebConfig {
         int loadOnStartup = webMvcProperties.getServlet().getLoadOnStartup();
         registrationBean.setLoadOnStartup(loadOnStartup); //设置初始化，不设置的话访问的时候才初始化
         return registrationBean;
+    }
+
+    @Bean
+    public RequestMappingHandlerMapping requestMappingHandlerMapping(){
+        return new RequestMappingHandlerMapping();
+    }
+
+    @Bean
+    public MyRequestMappingHandlerAdaptor requestMappingHandlerAdapter(){
+        return new MyRequestMappingHandlerAdaptor();
     }
 
 
