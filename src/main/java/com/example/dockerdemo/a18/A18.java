@@ -1,12 +1,16 @@
 package com.example.dockerdemo.a18;
 
 
+import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.aspectj.*;
+import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.framework.ReflectiveMethodInvocation;
+import org.springframework.aop.interceptor.ExposeInvocationInterceptor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 
 import java.lang.reflect.Method;
@@ -14,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class A18 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable {
         // 高级切面转低级切面
         List<Advisor> advisors=new ArrayList<>();
         for (Method method : Aspect.class.getDeclaredMethods()) {
@@ -55,9 +59,29 @@ public class A18 {
         for (Advisor advisor : advisors) {
             System.out.println(advisor);
         }
+
+        //通知统一转换为环绕通知
+        Target target=new Target();
+        ProxyFactory proxyFactory = new ProxyFactory();
+        proxyFactory.setTarget(target);
+        proxyFactory.addAdvisors(advisors);
+        // 把MethodInvocation放入当前线程
+        proxyFactory.addAdvice(ExposeInvocationInterceptor.INSTANCE);
+        System.out.println("...............................");
+        List<Object> methodInterceptorList =
+                proxyFactory.getInterceptorsAndDynamicInterceptionAdvice(Target.class.getMethod("foo"), Target.class);
+        for (Object o : methodInterceptorList) {
+            System.out.println(o);
+        }
+
+        // 创建并执行调用链(环绕通知+目标)
+        // 下面为protected方法不能外部调用
+//        MethodInvocation methodInvocation =
+//                new ReflectiveMethodInvocation(proxyFactory.getProxy(),target,Target.class.getMethod("foo"),new Object[0],Target.class,methodInterceptorList);
+//        methodInvocation.proceed();
     }
 
-    static class Aspect {
+    static class Aspect{
         @Before("execution(* foo())")
         public void before1() {
             System.out.println("before1");
