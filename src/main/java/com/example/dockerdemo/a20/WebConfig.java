@@ -13,6 +13,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.util.List;
+
 @Configuration
 @ComponentScan
 @PropertySource("classpath:application.properties")
@@ -46,7 +48,12 @@ public class WebConfig {
 
     @Bean
     public MyRequestMappingHandlerAdaptor requestMappingHandlerAdapter(){
-        return new MyRequestMappingHandlerAdaptor();
+        TokenArgumentResolver tokenArgumentResolver = new TokenArgumentResolver();
+        MyRequestMappingHandlerAdaptor handlerAdaptor = new MyRequestMappingHandlerAdaptor();
+        YmlReturnValueHandler ymlReturnValueHandler = new YmlReturnValueHandler();
+        handlerAdaptor.setCustomArgumentResolvers(List.of(tokenArgumentResolver));
+        handlerAdaptor.setCustomReturnValueHandlers(List.of(ymlReturnValueHandler));
+        return handlerAdaptor;
     }
 
 
