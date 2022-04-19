@@ -1,13 +1,16 @@
 package com.example.dockerdemo.a23;
 
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.ServletRequestParameterPropertyValues;
 
 import java.util.Date;
 
 /**
- * 走setter和getter方法
+ * Servlet环境下的数据绑定
  */
-public class TestBeanWrapper {
+public class TestServletDataBinder {
     static class MyBean{
         public  int a;public String b;public Date c;
 
@@ -46,10 +49,12 @@ public class TestBeanWrapper {
     }
     public static void main(String[] args) {
         MyBean target=new MyBean();
-        BeanWrapperImpl wrapper = new BeanWrapperImpl(target);
-        wrapper.setPropertyValue("a","10");
-        wrapper.setPropertyValue("b","hello");
-        wrapper.setPropertyValue("c","1999/03/04");
+        ServletRequestDataBinder dataBinder = new ServletRequestDataBinder(target);
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setParameter("a","10");
+        request.setParameter("b","hello");
+        request.setParameter("c","1999/03/04");
+        dataBinder.bind(new ServletRequestParameterPropertyValues(request));
         System.out.println(target);
 
 

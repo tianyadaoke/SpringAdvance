@@ -5,6 +5,9 @@ import org.springframework.beans.DirectFieldAccessor;
 
 import java.util.Date;
 
+/**
+ * 直接走成员变量
+ */
 public class TestFieldAccessor {
     static class MyBean{
         public  int a;public String b;public Date c;
