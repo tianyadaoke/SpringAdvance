@@ -37,13 +37,18 @@ public class TestTomcat {
         docBase.deleteOnExit();
         // 3.创建tomcat目录，在tomcat中为context
         Context context = tomcat.addContext("", docBase.getAbsolutePath());
+        WebApplicationContext springContext = getApplicationContext();
+
         // 4.编程添加Servlet
-        context.addServletContainerInitializer(new ServletContainerInitializer() {
-            @Override
-            public void onStartup(Set<Class<?>> set, ServletContext servletContext) throws ServletException {
-                HelloServlet helloServlet = new HelloServlet();
-                servletContext.addServlet("hello",helloServlet).addMapping("/hello");
+        context.addServletContainerInitializer((set, servletContext) -> {
+            HelloServlet helloServlet = new HelloServlet();
+            servletContext.addServlet("hello",helloServlet).addMapping("/hello");
+//                DispatcherServlet dispatcherServlet = springContext.getBean(DispatcherServlet.class);
+//                servletContext.addServlet("dispatcherServlet",dispatcherServlet).addMapping("/");
+            for (DispatcherServletRegistrationBean registrationBean : springContext.getBeansOfType(DispatcherServletRegistrationBean.class).values()) {
+                registrationBean.onStartup(servletContext);
             }
+
         }, Collections.emptySet());
         // 5.启动tomcat
         tomcat.start();
