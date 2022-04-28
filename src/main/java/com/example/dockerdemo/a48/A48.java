@@ -36,10 +36,18 @@ public class A48 {
         }
     }
 
-    static class SmsApplicationListener implements ApplicationListener{
+    @Component
+    static class SmsApplicationListener implements ApplicationListener<MyEvent>{
         @Override
-        public void onApplicationEvent(ApplicationEvent event) {
-
+        public void onApplicationEvent(MyEvent event) {
+            System.out.println("发送短信");
+        }
+    }
+    @Component
+    static class EmailApplicationListener implements ApplicationListener<MyEvent>{
+        @Override
+        public void onApplicationEvent(MyEvent event) {
+            System.out.println("发送邮件");
         }
     }
 
